@@ -14,6 +14,7 @@ import os
 import sys
 import requests
 from urllib.parse import quote
+import base64
 
 # Add parent directory to path for imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -193,6 +194,127 @@ def main():
         page_icon="🏆",
         layout="wide"
     )
+    
+    # Load and encode background image
+    bg_image_path = "image002.png"
+    if os.path.exists(bg_image_path):
+        with open(bg_image_path, "rb") as image_file:
+            encoded_image = base64.b64encode(image_file.read()).decode()
+        
+        # Custom CSS for background image
+        st.markdown(f"""
+            <style>
+            .stApp {{
+                background-image: url("data:image/png;base64,{encoded_image}");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+            }}
+            
+            /* Add semi-transparent overlay for better text readability */
+            .stApp::before {{
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: -1;
+            }}
+            
+            /* Header styling - dark background box */
+            .stApp > header {{
+                background-color: rgba(0, 0, 0, 0.8) !important;
+                backdrop-filter: blur(10px);
+            }}
+            
+            /* Main content area - dark semi-transparent background */
+            .main .block-container {{
+                background-color: rgba(0, 0, 0, 0.7);
+                padding: 2rem;
+                border-radius: 10px;
+                backdrop-filter: blur(5px);
+            }}
+            
+            /* Title and headers - white with glow */
+            h1, h2, h3 {{
+                color: #FFD700 !important;
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.9);
+            }}
+            
+            /* Regular text - white */
+            .stMarkdown, .stText, p, label, span, div {{
+                color: white !important;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            }}
+            
+            /* Sidebar - dark with gold accent */
+            [data-testid="stSidebar"] {{
+                background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
+                border-right: 2px solid #FFD700;
+            }}
+            
+            [data-testid="stSidebar"] * {{
+                color: white !important;
+            }}
+            
+            [data-testid="stSidebar"] h1, 
+            [data-testid="stSidebar"] h2, 
+            [data-testid="stSidebar"] h3 {{
+                color: #FFD700 !important;
+            }}
+            
+            /* Expanders - dark background */
+            .streamlit-expanderHeader {{
+                background-color: rgba(0, 0, 0, 0.8) !important;
+                border: 1px solid #FFD700 !important;
+            }}
+            
+            .streamlit-expanderContent {{
+                background-color: rgba(20, 20, 20, 0.9) !important;
+                border: 1px solid #FFD700 !important;
+            }}
+            
+            /* Metrics - gold accent */
+            [data-testid="stMetricValue"] {{
+                color: #FFD700 !important;
+            }}
+            
+            /* Buttons - gold */
+            .stButton > button {{
+                background-color: #FFD700 !important;
+                color: black !important;
+                font-weight: bold;
+                border: none;
+            }}
+            
+            .stButton > button:hover {{
+                background-color: #FFC700 !important;
+                box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            }}
+            
+            /* Tabs - blue accent for selected */
+            .stTabs [data-baseweb="tab-list"] {{
+                background-color: rgba(0, 0, 0, 0.8);
+            }}
+            
+            .stTabs [data-baseweb="tab"] {{
+                color: white !important;
+            }}
+            
+            .stTabs [aria-selected="true"] {{
+                background-color: #1E90FF !important;
+                color: white !important;
+            }}
+            
+            /* Dividers - gold */
+            hr {{
+                border-color: #FFD700 !important;
+            }}
+            </style>
+        """, unsafe_allow_html=True)
     
     # Header
     st.title("🏆 Gramlytics")
