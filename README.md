@@ -16,10 +16,60 @@ Gramlytics helps:
 
 ## 🚀 Live Features (MVP)
 
-- 🔍 Billboard Top 10 chart scraper
+- 🔍 Billboard Hot 100 chart data (all 100 songs)
 - 🧠 ML model predicting Grammy nomination probability
-- 🏆 Suggested Grammy category
-- 📊 Visual dashboard or app (Streamlit/Flask-based)
+- 🎨 Album art for each song
+- 🔎 Song lookup and search
+- 📊 Interactive Streamlit dashboard with explanations
+
+---
+
+## 🏃 Quick Start
+
+### Run the App
+
+```bash
+cd /../Gramlytics
+source venv/bin/activate
+streamlit run app/main.py
+```
+
+The app will open automatically at **http://localhost:8501**
+
+### First Time Setup
+
+```bash
+# 1. Navigate to project
+cd /../Gramlytics
+
+# 2. Create virtual environment (if not exists)
+python3 -m venv venv
+
+# 3. Activate virtual environment
+source venv/bin/activate
+
+# 4. Install dependencies
+pip install -r requirements.txt
+
+# 5. Run the app
+streamlit run app/main.py
+```
+
+### Update Data (Optional)
+
+```bash
+# Refresh Billboard Hot 100
+python scripts/ingest_billboard.py
+
+# Regenerate training data
+python scripts/prepare_training_data.py
+
+# Retrain model
+python scripts/train_baseline.py
+
+# Run app with updated data
+streamlit run app/main.py
+```
 
 ---
 
