@@ -1,0 +1,22 @@
+# Gramlytics - Sprint 1 Dependencies
+
+# Data ingestion
+billboard.py>=6.0.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Machine learning
+scikit-learn>=1.3.0
+
+# UI
+streamlit>=1.28.0
+
+# Optional utilities
+python-dateutil>=2.8.0
+
+# Album art
+spotipy>=2.23.0
